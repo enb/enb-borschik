@@ -18,7 +18,7 @@
  * **Пример**
  *
  * ```javascript
- * nodeConfig.addTech([ require('enb/techs/borschik'), {
+ * nodeConfig.addTech([ require('enb-borschik/techs/borschik'), {
  *   sourceTarget: '?.css',
  *   destTarget: '_?.css',
  *   minify: true,

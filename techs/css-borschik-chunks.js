@@ -21,7 +21,7 @@
  * **Пример**
  *
  * ```javascript
- * nodeConfig.addTech([ require('enb/techs/css-borschik-chunks'), {
+ * nodeConfig.addTech([ require('enb-borschik/techs/css-borschik-chunks'), {
  *   minify: true,
  *   freeze: true
  * } ]);

@@ -22,7 +22,7 @@ borschik
 **Пример**
 
 ```javascript
-nodeConfig.addTech([ require('enb/techs/borschik'), {
+nodeConfig.addTech([ require('enb-borschik/techs/borschik'), {
   sourceTarget: '?.css',
   destTarget: '_?.css',
   minify: true,
@@ -54,7 +54,7 @@ css-borschik-chunks
 **Пример**
 
 ```javascript
-nodeConfig.addTech([ require('enb/techs/css-borschik-chunks'), {
+nodeConfig.addTech([ require('enb-borschik/techs/css-borschik-chunks'), {
   minify: true,
   freeze: true
 } ]);
