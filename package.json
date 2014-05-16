@@ -1,6 +1,6 @@
 {
   "name": "enb-borschik",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "test": "npm run-script jshint && npm run-script check-style",
     "jshint": "jshint .",
@@ -18,14 +18,16 @@
   "homepage": "https://github.com/enb-make/enb-borschik",
   "peerDependencies": {
     "enb": ">=0.8.45",
-    "enb-bembundle": "^1.0.0"
+    "enb-bembundle": "^1.0.0",
+    "borschik": "^1.0.0"
   },
   "devDependencies": {
     "jscs": "~1.2.4",
     "jshint": "~2.4.2",
     "enb-validate-code": "0.0.1",
     "enb": ">=0.8.45",
-    "enb-bembundle": "^1.0.0"
+    "enb-bembundle": "^1.0.0",
+    "borschik": "^1.0.0"
   },
   "dependencies": {
     "inherit": "^2.2.1",
