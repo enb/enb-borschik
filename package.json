@@ -1,0 +1,35 @@
+{
+  "name": "enb-borschik",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "npm run-script jshint && npm run-script check-style",
+    "jshint": "jshint .",
+    "check-style": "jscs -c node_modules/enb-validate-code/jscs.json techs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/enb-make/enb-borschik.git"
+  },
+  "author": "Marat Dulin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/enb-make/enb-borschik/issues"
+  },
+  "homepage": "https://github.com/enb-make/enb-borschik",
+  "peerDependencies": {
+    "enb": ">=0.8.45",
+    "enb-bembundle": "^1.0.0"
+  },
+  "devDependencies": {
+    "jscs": "~1.2.4",
+    "jshint": "~2.4.2",
+    "enb-validate-code": "0.0.1",
+    "enb": ">=0.8.45",
+    "enb-bembundle": "^1.0.0"
+  },
+  "dependencies": {
+    "inherit": "^2.2.1",
+    "vow": "^0.4.3",
+    "sibling": "^0.1.3"
+  }
+}
