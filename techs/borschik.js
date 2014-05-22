@@ -34,7 +34,7 @@ var BorschikPreprocessor = require('../lib/borschik-preprocessor');
 /**
  * @type {Tech}
  */
-module.exports = inherit(require('../lib/tech/base-tech'), {
+module.exports = inherit(require('enb/lib/tech/base-tech'), {
     getName: function () {
         return 'borschik';
     },
