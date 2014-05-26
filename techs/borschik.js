@@ -9,8 +9,8 @@
  *
  * **Опции**
  *
- * * *String* **sourceTarget** — Исходный таргет. Например, `?.js`. Обязательная опция.
- * * *String* **destTarget** — Результирующий таргет. Например, `_?.js`. Обязательная опция.
+ * * *String* **source** — Исходный файл. Например, `?.js`. Обязательная опция.
+ * * *String* **target** — Результирующий файл. Например, `_?.js`. Обязательная опция.
  * * *Boolean* **minify** — Минифицировать ли в процессе обработки. По умолчанию — `true`.
  * * *Boolean* **freeze** — Использовать ли фризинг в процессе обработки. По умолчанию — `false`.
  * * *String* **tech** — Технология сборки. По умолчанию — соответствует расширению исходного таргета.
@@ -40,8 +40,14 @@ module.exports = inherit(require('enb/lib/tech/base-tech'), {
     },
 
     configure: function () {
-        this._source = this.node.unmaskTargetName(this.getRequiredOption('sourceTarget'));
-        this._target = this.node.unmaskTargetName(this.getRequiredOption('destTarget'));
+        this._source = this.getOption('sourceTarget');
+        if (!this._source) {
+            this._source = this.getRequiredOption('source');
+        }
+        this._target = this.getOption('destTarget');
+        if (!this._target) {
+            this._target = this.getRequiredOption('target');
+        }
         this._freeze = this.getOption('freeze', false);
         this._minify = this.getOption('minify', true);
         this._tech = this.getOption('tech', null);
@@ -52,9 +58,9 @@ module.exports = inherit(require('enb/lib/tech/base-tech'), {
     },
 
     build: function () {
-        var target = this._target;
+        var target = this.node.unmaskTargetName(this._target);
         var targetPath = this.node.resolvePath(target);
-        var source = this._source;
+        var source = this.node.unmaskTargetName(this._source);
         var sourcePath = this.node.resolvePath(source);
         var _this = this;
         var cache = this.node.getNodeCache(target);
