@@ -54,7 +54,7 @@ module.exports = inherit(require('enb/lib/tech/base-tech'), {
     },
 
     getTargets: function () {
-        return [this._target];
+        return [this.node.unmaskTargetName(this._target)];
     },
 
     build: function () {
