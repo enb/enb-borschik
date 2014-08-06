@@ -14,6 +14,7 @@
  * * *Boolean* **minify** — Минифицировать ли в процессе обработки. По умолчанию — `true`.
  * * *Boolean* **freeze** — Использовать ли фризинг в процессе обработки. По умолчанию — `false`.
  * * *String* **tech** — Технология сборки. По умолчанию — соответствует расширению исходного таргета.
+ * * *Object* **techOptions** — Параметры для технологии. 
  *
  * **Пример**
  *
@@ -51,6 +52,7 @@ module.exports = inherit(require('enb/lib/tech/base-tech'), {
         this._freeze = this.getOption('freeze', false);
         this._minify = this.getOption('minify', true);
         this._tech = this.getOption('tech', null);
+        this._techOptions = this.getOption('techOptions', null);
     },
 
     getTargets: function () {
@@ -70,7 +72,13 @@ module.exports = inherit(require('enb/lib/tech/base-tech'), {
             ) {
                 var borschikProcessor = BorschikProcessorSibling.fork();
                 return vow.when(
-                    borschikProcessor.process(sourcePath, targetPath, _this._freeze, _this._minify, _this._tech)
+                    borschikProcessor.process(
+                        sourcePath,
+                        targetPath,
+                        _this._freeze,
+                        _this._minify,
+                        _this._tech,
+                        _this._techOptions)
                 ).then(function () {
                     cache.cacheFileInfo('source-file', sourcePath);
                     cache.cacheFileInfo('target-file', targetPath);
@@ -87,7 +95,7 @@ module.exports = inherit(require('enb/lib/tech/base-tech'), {
 });
 
 var BorschikProcessorSibling = require('sibling').declare({
-    process: function (sourcePath, targetPath, freeze, minify, tech) {
-        return (new BorschikPreprocessor()).preprocessFile(sourcePath, targetPath, freeze, minify, tech);
+    process: function (sourcePath, targetPath, freeze, minify, tech, techOptions) {
+        return (new BorschikPreprocessor()).preprocessFile(sourcePath, targetPath, freeze, minify, tech, techOptions);
     }
 });
