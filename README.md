@@ -9,7 +9,7 @@ borschik
 Обрабатывает файл Борщиком (раскрытие borschik-ссылок, минификация, фризинг).
 
 Настройки фризинга и путей описываются в конфиге Борщика (`.borschik`) в корне проекта
-(https://github.com/veged/borschik/blob/master/README.ru.md).
+(https://github.com/bem/borschik/blob/master/README.ru.md).
 
 **Опции**
 
