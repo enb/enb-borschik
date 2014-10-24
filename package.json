@@ -19,7 +19,7 @@
   "peerDependencies": {
     "enb": ">=0.13.0",
     "enb-bembundle": "^1.0.0",
-    "borschik": "^1.2.0"
+    "borschik": "^1.3.2"
   },
   "devDependencies": {
     "jscs": "~1.2.4",
@@ -27,7 +27,7 @@
     "enb-validate-code": "0.0.1",
     "enb": ">=0.13.0",
     "enb-bembundle": "^1.0.0",
-    "borschik": "^1.2.0"
+    "borschik": "^1.3.2"
   },
   "dependencies": {
     "inherit": "^2.2.1",
