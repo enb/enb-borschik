@@ -1,6 +1,6 @@
 {
   "name": "enb-borschik",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "scripts": {
     "test": "npm run-script jshint && npm run-script check-style",
     "jshint": "jshint .",
