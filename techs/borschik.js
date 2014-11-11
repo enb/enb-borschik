@@ -13,6 +13,7 @@
  * * *String* **target** — Результирующий файл. Например, `_?.js`. Обязательная опция.
  * * *Boolean* **minify** — Минифицировать ли в процессе обработки. По умолчанию — `true`.
  * * *Boolean* **freeze** — Использовать ли фризинг в процессе обработки. По умолчанию — `false`.
+ * * *Boolean* **noCache** — Не использовать кеш для принятия решения о пересборке файла. По умолчанию — `false`.
  * * *String* **tech** — Технология сборки. По умолчанию — соответствует расширению исходного таргета.
  * * *Object* **techOptions** — Параметры для технологии. 
  *
@@ -51,6 +52,7 @@ module.exports = inherit(require('enb/lib/tech/base-tech'), {
         }
         this._freeze = this.getOption('freeze', false);
         this._minify = this.getOption('minify', true);
+        this._noCache = this.getOption('noCache', false);
         this._tech = this.getOption('tech', null);
         this._techOptions = this.getOption('techOptions', null);
     },
@@ -67,7 +69,8 @@ module.exports = inherit(require('enb/lib/tech/base-tech'), {
         var _this = this;
         var cache = this.node.getNodeCache(target);
         return this.node.requireSources([source]).then(function () {
-            if (cache.needRebuildFile('source-file', sourcePath) ||
+            if (_this._noCache ||
+                cache.needRebuildFile('source-file', sourcePath) ||
                 cache.needRebuildFile('target-file', targetPath)
             ) {
                 var borschikProcessor = BorschikProcessorSibling.fork();
