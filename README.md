@@ -1,7 +1,7 @@
 enb-borschik [![Build Status](https://travis-ci.org/enb-make/enb-borschik.png?branch=master)](https://travis-ci.org/enb-make/enb-borschik)
 ==========
 
-Предоставляет технологии `borschik`, `css-borschik-chunks`.
+Предоставляет технологии `borschik`, `css-borschik-chunks` и `js-borschik-include`.
 
 borschik
 ========
@@ -59,4 +59,31 @@ nodeConfig.addTech([ require('enb-borschik/techs/css-borschik-chunks'), {
   minify: true,
   freeze: true
 } ]);
+```
+
+js-borschik-include
+===================
+
+Собирает *js*-файлы инклудами борщика, сохраняет в виде `?.js`.
+Технология нужна, если в исходных *js*-файлах используются инклуды борщика.
+
+В последствии, получившийся файл `?.js` следует раскрывать с помощью технологии `borschik`.
+
+**Опции**
+
+* *String* **target** — Результирующий таргет. Обязательная опция.
+* *String* **filesTarget** — files-таргет, на основе которого получается список исходных файлов
+ (его предоставляет технология `files`). По умолчанию — `?.files`.
+* *String[]* **sourceSuffixes** — суффиксы файлов, по которым строится files-таргет. По умолчанию — ['js'].
+
+**Пример**
+
+```javascript
+nodeConfig.addTechs([
+  [ require('enb-borschik/techs/js-borschik-include') ],
+  [ require('enb-borschik/techs/borschik'), {
+      source: '?.js',
+      target: '_?.js'
+  } ]);
+]);
 ```
