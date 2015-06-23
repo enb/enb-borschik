@@ -1,37 +1,48 @@
 {
   "name": "enb-borschik",
   "version": "1.5.1",
-  "scripts": {
-    "test": "npm run-script jshint && npm run-script check-style",
-    "jshint": "jshint .",
-    "check-style": "jscs -c node_modules/enb-validate-code/jscs.json techs"
-  },
   "repository": {
     "type": "git",
     "url": "git://github.com/enb-make/enb-borschik.git"
   },
   "author": "Marat Dulin",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/enb-make/enb-borschik/issues"
   },
   "homepage": "https://github.com/enb-make/enb-borschik",
+  "licenses": [
+    {
+      "type": "MPL-2.0",
+      "url": "https://github.com/enb-make/enb-borschik/blob/master/LICENSE.txt"
+    }
+  ],
   "peerDependencies": {
-    "enb": ">=0.13.0",
-    "enb-bembundle": "^1.0.0",
-    "borschik": "^1.3.2"
-  },
-  "devDependencies": {
-    "jscs": "~1.2.4",
-    "jshint": "~2.4.2",
-    "enb-validate-code": "0.0.1",
-    "enb": ">=0.13.0",
-    "enb-bembundle": "^1.0.0",
-    "borschik": "^1.3.2"
+    "enb": ">= 0.11.0 < 1.0.0"
   },
   "dependencies": {
+    "borschik": "^1.3.2",
+    "enb-bembundle": "^1.0.0",
     "inherit": "^2.2.1",
     "vow": "^0.4.3",
     "sibling": "^0.1.3"
+  },
+  "devDependencies": {
+    "bower": "1.3.9",
+    "enb": ">= 0.11.0 < 1.0.0",
+    "istanbul": "0.3.14",
+    "jscs": "1.13.1",
+    "jshint": "2.7.0",
+    "mocha": "2.2.5",
+    "mock-enb": "0.0.1",
+    "mock-fs": "2.7.0",
+    "mock-require": "1.0.5",
+    "must": "0.12.0"
+  },
+  "scripts": {
+    "test": "npm run lint && npm run unit",
+    "lint": "jshint . && jscs -c .jscs.js .",
+    "unit": "npm run deps && mocha -R spec",
+    "cover": "istanbul cover _mocha",
+    "coveralls": "npm i coveralls && npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
   }
 }
