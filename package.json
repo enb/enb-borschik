@@ -41,7 +41,7 @@
   "scripts": {
     "test": "npm run lint && npm run unit",
     "lint": "jshint . && jscs -c .jscs.js .",
-    "unit": "npm run deps && mocha -R spec",
+    "unit": "mocha -R spec",
     "cover": "istanbul cover _mocha",
     "coveralls": "npm i coveralls && npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
   }
