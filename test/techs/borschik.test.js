@@ -39,18 +39,21 @@ describe('borschik', function () {
     });
 
     describe('css', function () {
+        var baseOptions = {
+            sourceTarget: '?.css',
+            destTarget: '_?.css',
+            noCache: true
+        };
+
         it('must replace links in css file', function () {
             var scheme = {
                     configFile: { paths: { './': '/borschik/' } },
                     'bundle.css': '.block { background-image: url(./a/b.gif); }'
                 },
-                options = {
-                    sourceTarget: '?.css',
-                    destTarget: '_?.css',
-                    noCache: true,
+                options = mergeConfigs(baseOptions, {
                     minify: false,
                     freeze: false
-                };
+                });
 
             return build(scheme, options).then(function (content) {
                 content.must.equal('.block { background-image: url("/borschik/a/b.gif"); }');
@@ -62,13 +65,10 @@ describe('borschik', function () {
                     configFile: { paths: { './': '/borschik/' } },
                     'bundle.css': '.block { background-image: url(./a/b.gif); }'
                 },
-                options = {
-                    sourceTarget: '?.css',
-                    destTarget: '_?.css',
-                    noCache: true,
+                options = mergeConfigs(baseOptions, {
                     minify: true,
                     freeze: false
-                };
+                });
 
             return build(scheme, options).then(function (content) {
                 content.must.equal('.block{background-image:url("/borschik/a/b.gif")}');
@@ -86,13 +86,10 @@ describe('borschik', function () {
                     'image.gif': new Buffer('Hello World'),
                     'bundle.css': '.block { background-image: url("image.gif"); }'
                 },
-                options = {
-                    sourceTarget: '?.css',
-                    destTarget: '_?.css',
-                    noCache: true,
+                options = mergeConfigs(baseOptions, {
                     minify: false,
                     freeze: true
-                };
+                });
 
             return build(scheme, options).then(function (content) {
                 content.must.equal(
@@ -110,13 +107,10 @@ describe('borschik', function () {
                     'image.gif': new Buffer('Hello World'),
                     'bundle.css': '.block { background-image: url("image.gif"); }'
                 },
-                options = {
-                    sourceTarget: '?.css',
-                    destTarget: '_?.css',
-                    noCache: true,
+                options = mergeConfigs(baseOptions, {
                     minify: true,
                     freeze: true
-                };
+                });
 
             return build(scheme, options).then(function (content) {
                 content.must.equal(
@@ -135,14 +129,11 @@ describe('borschik', function () {
                     'extra.css': 'a { background:url(../partials/extra/down.gif) 0 0 no-repeat;}',
                     'bundle.css': '@import "./extra.css";'
                 },
-                options = {
-                    sourceTarget: '?.css',
-                    destTarget: '_?.css',
-                    noCache: true,
+                options = mergeConfigs(baseOptions, {
                     minify: true,
                     freeze: false,
                     tech: 'cleancss'
-                };
+                });
 
             return build(scheme, options).then(function (content) {
                 content.must.equal('a{background:url(../partials/extra/down.gif) no-repeat}');
@@ -163,10 +154,7 @@ describe('borschik', function () {
                         '@import "./extra.css";',
                     ].join(EOL)
                 },
-                options = {
-                    sourceTarget: '?.css',
-                    destTarget: '_?.css',
-                    noCache: true,
+                options = mergeConfigs(baseOptions, {
                     minify: true,
                     freeze: false,
                     tech: 'cleancss',
@@ -175,7 +163,7 @@ describe('borschik', function () {
                             keepSpecialComments: 0
                         }
                     }
-                };
+                });
 
             return build(scheme, options).then(function (content) {
                 content.must.equal('a{background:url(../partials/extra/down.gif) no-repeat}');
@@ -186,6 +174,13 @@ describe('borschik', function () {
     describe('js', function () {
 
     });
+
+    function mergeConfigs(baseOptions, options) {
+        return Object.keys(baseOptions).reduce(function (prev, item) {
+            prev[item] = baseOptions[item];
+            return prev;
+        }, options);
+    }
 
     function build(scheme, options) {
         var bundle;
