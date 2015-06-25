@@ -172,7 +172,100 @@ describe('borschik', function () {
     });
 
     describe('js', function () {
+        var baseOptions = {
+                sourceTarget: '?.js',
+                destTarget: '_?.js',
+                noCache: true
+            },
+            borschikJS;
 
+        before(function () {
+            borschikJS = fs.readFileSync(
+                path.resolve('./test/fixtures/borschik.js'), { encoding: 'utf-8' });
+        });
+
+        it('must replace links in js file', function () {
+            var scheme = {
+                    configFile: { paths: { './': '/borschik/' } },
+                    'bundle.js': [
+                        'var borschik = ' + borschikJS,
+                        'exports.src = borschik.link("./a/b.gif");'
+                    ].join(EOL)
+                },
+                options = mergeConfigs(baseOptions, {
+                    minify: false,
+                    freeze: false
+                });
+
+            return build(scheme, options, true).then(function (content) {
+                content[0].src.must.equal('/borschik/a/b.gif');
+            });
+        });
+
+        it('must replace links in js file with minify option', function () {
+            var scheme = {
+                    configFile: { paths: { './': '/borschik/' } },
+                    'bundle.js': [
+                        'var borschik = ' + borschikJS,
+                        'exports.src = function () { return borschik.link("./a/b.gif"); }'
+                    ].join(EOL)
+                },
+                options = mergeConfigs(baseOptions, {
+                    minify: true,
+                    freeze: false
+                });
+
+            return build(scheme, options, true).then(function (content) {
+                content[0].src.toString().must.equal('function (){return"/borschik/a/b.gif"}');
+            });
+        });
+
+        it('must replace links in js file with freeze option', function () {
+            var scheme = {
+                    configFile: {
+                        freeze_paths: {
+                            '**/*': 'freeze'
+                        }
+                    },
+                    'image.gif': new Buffer('Hello World'),
+                    'bundle.js': [
+                        'var borschik = ' + borschikJS,
+                        'exports.src = borschik.link("image.gif");'
+                    ].join(EOL)
+                },
+                options = mergeConfigs(baseOptions, {
+                    minify: false,
+                    freeze: true
+                });
+
+            return build(scheme, options, true).then(function (content) {
+                content[0].src.toString().must.equal('freeze/Ck1VqNd45QIvq3AZd8XYQLvEhtA.gif');
+            });
+        });
+
+        it('must replace links in js file with minify and freeze options together', function () {
+            var scheme = {
+                    configFile: {
+                        freeze_paths: {
+                            '**/*': 'freeze'
+                        }
+                    },
+                    'image.gif': new Buffer('Hello World'),
+                    'bundle.js': [
+                        'var borschik = ' + borschikJS,
+                        'exports.src = function () { return borschik.link("image.gif"); }'
+                    ].join(EOL)
+                },
+                options = mergeConfigs(baseOptions, {
+                    minify: true,
+                    freeze: true
+                });
+
+            return build(scheme, options, true).then(function (content) {
+                content[0].src.toString().must.equal(
+                    'function (){return"freeze/Ck1VqNd45QIvq3AZd8XYQLvEhtA.gif"}');
+            });
+        });
     });
 
     function mergeConfigs(baseOptions, options) {
@@ -182,8 +275,9 @@ describe('borschik', function () {
         }, options);
     }
 
-    function build(scheme, options) {
-        var bundle;
+    function build(scheme, options, isNeedRequire) {
+        var bundle,
+            testFunc;
 
         Object.keys(scheme).forEach(function (item) {
             if (item === 'configFile') {
@@ -193,9 +287,12 @@ describe('borschik', function () {
             }
         });
         bundle = new MockNode('bundle');
-        return bundle.runTechAndGetContent(Tech, options)
+
+        testFunc = isNeedRequire ? bundle.runTechAndRequire : bundle.runTechAndGetContent;
+
+        return testFunc.call(bundle, Tech, options)
             .then(function (content) {
-                return content.toString('utf-8');
+                return isNeedRequire ? content : content.toString('utf-8');
             });
     }
 });
