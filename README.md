@@ -1,5 +1,11 @@
-enb-borschik [![Build Status](https://travis-ci.org/enb-make/enb-borschik.png?branch=master)](https://travis-ci.org/enb-make/enb-borschik)
+enb-borschik
 ==========
+
+[![NPM version](http://img.shields.io/npm/v/enb-borschik.svg?style=flat)](https://www.npmjs.org/package/enb-borschik)
+[![Build Status](http://img.shields.io/travis/enb-make/enb-borschik/master.svg?style=flat&label=tests)](https://travis-ci.org/enb-make/enb-borschik)
+[![Build status](https://img.shields.io/appveyor/ci/blond/enb-bh.svg?style=flat&label=windows)](https://ci.appveyor.com/project/blond/enb-bh)
+[![Coverage Status](https://img.shields.io/coveralls/enb-make/enb-borschik.svg?style=flat)](https://coveralls.io/r/enb-make/enb-borschik?branch=master)
+[![devDependency Status](http://img.shields.io/david/enb-make/enb-borschik.svg?style=flat)](https://david-dm.org/enb-make/enb-borschik)
 
 Предоставляет технологии `borschik`, `css-borschik-chunks` и `js-borschik-include`.
 
