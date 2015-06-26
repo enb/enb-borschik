@@ -15,7 +15,7 @@
  * * *Boolean* **freeze** — Использовать ли фризинг в процессе обработки. По умолчанию — `false`.
  * * *Boolean* **noCache** — Не использовать кеш для принятия решения о пересборке файла. По умолчанию — `false`.
  * * *String* **tech** — Технология сборки. По умолчанию — соответствует расширению исходного таргета.
- * * *Object* **techOptions** — Параметры для технологии. 
+ * * *Object* **techOptions** — Параметры для технологии.
  *
  * **Пример**
  *
@@ -29,9 +29,15 @@
  * } ]);
  * ```
  */
-var vow = require('vow');
-var inherit = require('inherit');
-var BorschikPreprocessor = require('../lib/borschik-preprocessor');
+var vow = require('vow'),
+    inherit = require('inherit'),
+    BorschikPreprocessor = require('../lib/borschik-preprocessor'),
+    BorschikProcessorSibling = require('sibling').declare({
+        process: function (sourcePath, targetPath, freeze, minify, tech, techOptions) {
+            return (new BorschikPreprocessor())
+                .preprocessFile(sourcePath, targetPath, freeze, minify, tech, techOptions);
+        }
+    });
 
 /**
  * @type {Tech}
@@ -62,12 +68,12 @@ module.exports = inherit(require('enb/lib/tech/base-tech'), {
     },
 
     build: function () {
-        var target = this.node.unmaskTargetName(this._target);
-        var targetPath = this.node.resolvePath(target);
-        var source = this.node.unmaskTargetName(this._source);
-        var sourcePath = this.node.resolvePath(source);
-        var _this = this;
-        var cache = this.node.getNodeCache(target);
+        var target = this.node.unmaskTargetName(this._target),
+            targetPath = this.node.resolvePath(target),
+            source = this.node.unmaskTargetName(this._source),
+            sourcePath = this.node.resolvePath(source),
+            _this = this,
+            cache = this.node.getNodeCache(target);
         return this.node.requireSources([source]).then(function () {
             if (_this._noCache ||
                 cache.needRebuildFile('source-file', sourcePath) ||
@@ -94,11 +100,5 @@ module.exports = inherit(require('enb/lib/tech/base-tech'), {
                 return null;
             }
         });
-    }
-});
-
-var BorschikProcessorSibling = require('sibling').declare({
-    process: function (sourcePath, targetPath, freeze, minify, tech, techOptions) {
-        return (new BorschikPreprocessor()).preprocessFile(sourcePath, targetPath, freeze, minify, tech, techOptions);
     }
 });
