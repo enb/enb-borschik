@@ -1,7 +1,6 @@
 module.exports = {
     excludeFiles: [
         'node_modules',
-        'exlib',
         'coverage',
         'test'
     ],

@@ -75,7 +75,6 @@ describe('borschik', function () {
             });
         });
 
-
         it('must replace links in css file with freeze option', function () {
             var scheme = {
                     configFile: {
@@ -126,7 +125,7 @@ describe('borschik', function () {
                         }
                     },
                     'image.gif': new Buffer('Hello World'),
-                    'extra.css': 'a { background:url(../partials/extra/down.gif) 0 0 no-repeat;}',
+                    'extra.css': 'a { background: url(../partials/extra/down.gif) 0 0 no-repeat;}',
                     'bundle.css': '@import "./extra.css";'
                 },
                 options = mergeConfigs(baseOptions, {
@@ -148,7 +147,7 @@ describe('borschik', function () {
                         }
                     },
                     'image.gif': new Buffer('Hello World'),
-                    'extra.css': 'a { background:url(../partials/extra/down.gif) 0 0 no-repeat;}',
+                    'extra.css': 'a { background: url(../partials/extra/down.gif) 0 0 no-repeat;}',
                     'bundle.css': [
                         '/*! Important comments included in minified output. */',
                         '@import "./extra.css";',
@@ -180,8 +179,7 @@ describe('borschik', function () {
             borschikJS;
 
         before(function () {
-            borschikJS = fs.readFileSync(
-                path.resolve('./test/fixtures/borschik.js'), { encoding: 'utf-8' });
+            borschikJS = fs.readFileSync(path.resolve('./test/fixtures/borschik.js'), { encoding: 'utf-8' });
         });
 
         it('must replace links in js file', function () {
@@ -197,8 +195,8 @@ describe('borschik', function () {
                     freeze: false
                 });
 
-            return build(scheme, options, true).then(function (content) {
-                content[0].src.must.equal('/borschik/a/b.gif');
+            return build(scheme, options, true).spread(function (content) {
+                content.src.must.equal('/borschik/a/b.gif');
             });
         });
 
@@ -215,8 +213,8 @@ describe('borschik', function () {
                     freeze: false
                 });
 
-            return build(scheme, options, true).then(function (content) {
-                content[0].src.toString().must.equal('function (){return"/borschik/a/b.gif"}');
+            return build(scheme, options, true).spread(function (content) {
+                content.src.toString().must.equal('function (){return"/borschik/a/b.gif"}');
             });
         });
 
@@ -238,8 +236,8 @@ describe('borschik', function () {
                     freeze: true
                 });
 
-            return build(scheme, options, true).then(function (content) {
-                content[0].src.toString().must.equal('freeze/Ck1VqNd45QIvq3AZd8XYQLvEhtA.gif');
+            return build(scheme, options, true).spread(function (content) {
+                content.src.toString().must.equal('freeze/Ck1VqNd45QIvq3AZd8XYQLvEhtA.gif');
             });
         });
 
@@ -261,8 +259,8 @@ describe('borschik', function () {
                     freeze: true
                 });
 
-            return build(scheme, options, true).then(function (content) {
-                content[0].src.toString().must.equal(
+            return build(scheme, options, true).spread(function (content) {
+                content.src.toString().must.equal(
                     'function (){return"freeze/Ck1VqNd45QIvq3AZd8XYQLvEhtA.gif"}');
             });
         });
