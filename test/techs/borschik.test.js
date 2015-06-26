@@ -260,8 +260,42 @@ describe('borschik', function () {
                 });
 
             return build(scheme, options, true).spread(function (content) {
-                content.src.toString().must.equal(
-                    'function (){return"freeze/Ck1VqNd45QIvq3AZd8XYQLvEhtA.gif"}');
+                content.src.toString().must.equal('function (){return"freeze/Ck1VqNd45QIvq3AZd8XYQLvEhtA.gif"}');
+            });
+        });
+
+        it('must replace links in js file with minify, freeze and uglify', function () {
+            var scheme = {
+                    configFile: {
+                        freeze_paths: {
+                            '**/*': 'freeze'
+                        }
+                    },
+                    'image.gif': new Buffer('Hello World'),
+                    'bundle.js': [
+                        'var borschik = ' + borschikJS,
+                        'exports.src = function () { return borschik.link("image.gif"); }'
+                    ].join(EOL)
+                },
+                options = mergeConfigs(baseOptions, {
+                    minify: true,
+                    freeze: true,
+                    techOptions: {
+                        uglify: {
+                            output: {
+                                beautify: true,
+                                indent_start: 4
+                            }
+                        }
+                    }
+                });
+
+            return build(scheme, options, true).spread(function (content) {
+                content.src.toString().must.equal([
+                    'function () {',
+                    '        return "freeze/Ck1VqNd45QIvq3AZd8XYQLvEhtA.gif";',
+                    '    }'
+                ].join(EOL));
             });
         });
     });
