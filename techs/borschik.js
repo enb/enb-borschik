@@ -30,75 +30,47 @@
  * ```
  */
 var vow = require('vow'),
-    inherit = require('inherit'),
-    BorschikPreprocessor = require('../lib/borschik-preprocessor'),
-    BorschikProcessorSibling = require('sibling').declare({
-        process: function (sourcePath, targetPath, freeze, minify, tech, techOptions) {
-            return (new BorschikPreprocessor())
-                .preprocessFile(sourcePath, targetPath, freeze, minify, tech, techOptions);
+    preprocessor = new (require('../lib/borschik-preprocessor'))(),
+    ProcessorSibling = require('sibling').declare({
+        process: function () {
+            return preprocessor.preprocessFile.apply(preprocessor, arguments);
         }
     });
 
-/**
- * @type {Tech}
- */
-module.exports = inherit(require('enb/lib/tech/base-tech'), {
-    getName: function () {
-        return 'borschik';
-    },
+module.exports = require('enb/lib/build-flow').create()
+    .name('borschik')
+    .target('target')
+    .useSourceFilename('source')
+    .optionAlias('target', 'destTarget')
+    .optionAlias('source', 'sourceTarget')
+    .defineOption('minify', true)
+    .defineOption('freeze', false)
+    .defineOption('noCache', false)
+    .defineOption('tech', null)
+    .defineOption('techOptions', null)
+    .needRebuild(function () {
+        return this._noCache;
+    })
+    .saver(function () {})
+    .builder(function () {
+        var node = this.node,
+            borschikProcessor = ProcessorSibling.fork();
 
-    configure: function () {
-        this._source = this.getOption('sourceTarget');
-        if (!this._source) {
-            this._source = this.getRequiredOption('source');
-        }
-        this._target = this.getOption('destTarget');
-        if (!this._target) {
-            this._target = this.getRequiredOption('target');
-        }
-        this._freeze = this.getOption('freeze', false);
-        this._minify = this.getOption('minify', true);
-        this._noCache = this.getOption('noCache', false);
-        this._tech = this.getOption('tech', null);
-        this._techOptions = this.getOption('techOptions', null);
-    },
-
-    getTargets: function () {
-        return [this.node.unmaskTargetName(this._target)];
-    },
-
-    build: function () {
-        var target = this.node.unmaskTargetName(this._target),
-            targetPath = this.node.resolvePath(target),
-            source = this.node.unmaskTargetName(this._source),
-            sourcePath = this.node.resolvePath(source),
-            _this = this,
-            cache = this.node.getNodeCache(target);
-        return this.node.requireSources([source]).then(function () {
-            if (_this._noCache ||
-                cache.needRebuildFile('source-file', sourcePath) ||
-                cache.needRebuildFile('target-file', targetPath)
-            ) {
-                var borschikProcessor = BorschikProcessorSibling.fork();
-                return vow.when(
-                    borschikProcessor.process(
-                        sourcePath,
-                        targetPath,
-                        _this._freeze,
-                        _this._minify,
-                        _this._tech,
-                        _this._techOptions)
-                ).then(function () {
-                    cache.cacheFileInfo('source-file', sourcePath);
-                    cache.cacheFileInfo('target-file', targetPath);
-                    _this.node.resolveTarget(target);
-                    borschikProcessor.dispose();
-                });
-            } else {
-                _this.node.isValidTarget(target);
-                _this.node.resolveTarget(target);
-                return null;
-            }
-        });
-    }
-});
+        return vow
+            .when(borschikProcessor.process(
+                node.resolvePath(this._source),
+                node.resolvePath(this._target),
+                this._freeze,
+                this._minify,
+                this._tech,
+                this._techOptions
+            ))
+            .then(function () {
+                borschikProcessor.dispose();
+            })
+            .fail(function (err) {
+                borschikProcessor.dispose();
+                throw err;
+            });
+    })
+    .createTech();
