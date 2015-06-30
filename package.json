@@ -35,7 +35,7 @@
     "jscs": "1.13.1",
     "jshint": "2.7.0",
     "mocha": "2.2.5",
-    "mock-enb": "0.0.1",
+    "mock-enb": "0.0.2",
     "mock-require": "1.0.5",
     "must": "0.12.0"
   },
