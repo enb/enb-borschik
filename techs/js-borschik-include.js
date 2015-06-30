@@ -26,15 +26,14 @@
  * ]);
  * ```
  */
+var EOL = require('os').EOL;
 module.exports = require('enb/lib/build-flow').create()
     .name('js-borschik-include')
     .target('target', '?.js')
     .useFileList(['js'])
     .builder(function (files) {
-        var node = this.node;
-
         return files.map(function (file) {
-            return '/*borschik:include:' + node.relativePath(file.fullname) + '*/';
-        }).join('\n');
+            return '/*borschik:include:' + this.node.relativePath(file.fullname) + '*/';
+        }, this).join(EOL);
     })
     .createTech();
