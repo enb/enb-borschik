@@ -11,6 +11,7 @@
  *
  * * *String* **source** — Исходный файл. Например, `?.js`. Обязательная опция.
  * * *String* **target** — Результирующий файл. Например, `_?.js`. Обязательная опция.
+ * * *String* **dependantFiles** — Замораживаемые борщиком файлы. Например `['?.css', '?.js']`.
  * * *Boolean* **minify** — Минифицировать ли в процессе обработки. По умолчанию — `true`.
  * * *Boolean* **freeze** — Использовать ли фризинг в процессе обработки. По умолчанию — `false`.
  * * *Boolean* **noCache** — Не использовать кеш для принятия решения о пересборке файла. По умолчанию — `false`.
@@ -23,6 +24,7 @@
  * nodeConfig.addTech([ require('enb-borschik/techs/borschik'), {
  *   sourceTarget: '?.css',
  *   destTarget: '_?.css',
+ *   dependantFiles: ['?.css', '?.js'],
  *   minify: true,
  *   freeze: true,
  *   tech: 'css+'
@@ -41,6 +43,7 @@ module.exports = require('enb/lib/build-flow').create()
     .name('borschik')
     .target('target')
     .useSourceFilename('source')
+    .useSourceListFilenames('dependantFiles')
     .optionAlias('target', 'destTarget')
     .optionAlias('source', 'sourceTarget')
     .defineOption('minify', true)
