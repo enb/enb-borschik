@@ -1,6 +1,7 @@
 var EOL = require('os').EOL,
     fs = require('fs'),
     path = require('path'),
+    vow = require('vow'),
     fsExtra = require('fs-extra'),
     clearConfigCache = require('borschik/lib/freeze').clearConfigCache,
     MockNode = require('mock-enb/lib/mock-node'),
@@ -20,8 +21,8 @@ describe('borschik', function () {
 
     describe('css', function () {
         var baseOptions = {
-            sourceTarget: '?.css',
-            destTarget: '_?.css',
+            source: '?.css',
+            target: '_?.css',
             noCache: true
         };
 
@@ -152,8 +153,8 @@ describe('borschik', function () {
 
     describe('js', function () {
         var baseOptions = {
-                sourceTarget: '?.js',
-                destTarget: '_?.js',
+                source: '?.js',
+                target: '_?.js',
                 noCache: true
             },
             borschikJS;
@@ -276,6 +277,45 @@ describe('borschik', function () {
                     '        return "freeze/Ck1VqNd45QIvq3AZd8XYQLvEhtA.gif";',
                     '    }'
                 ].join(EOL));
+            });
+        });
+    });
+
+    describe('bemtree', function () {
+        var baseOptions = {
+                source: '?.bemtree.js',
+                target: '_?.bemtree.js',
+                noCache: true
+            },
+            borschikJS;
+
+        before(function () {
+            borschikJS = fs.readFileSync(path.resolve('./test/fixtures/borschik.js'), { encoding: 'utf-8' });
+        });
+
+        it('must freeze url to js file inside bemtree template', function () {
+            var scheme = {
+                    configFile: {
+                        freeze_paths: {
+                            '**/*': 'freeze'
+                        }
+                    },
+                    'site.js': new Buffer('Hello World'),
+                    'bundle.bemtree.js': [
+                        'var borschik = ' + borschikJS,
+                        fs.readFileSync(path.resolve('./test/fixtures/bundle.bemtree.js'), { encoding: 'utf-8' })
+                    ].join(EOL)
+                },
+                options = mergeConfigs(baseOptions, {
+                    minify: false,
+                    freeze: true
+                });
+
+            return build(scheme, options, true).spread(function (content) {
+                global.Vow = vow;
+                return content.BEMTREE.apply({ block: 'page' }).then(function (bemjson) {
+                    bemjson.content[1].url.must.equal('freeze/Ck1VqNd45QIvq3AZd8XYQLvEhtA.js');
+                });
             });
         });
     });
