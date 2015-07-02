@@ -32,6 +32,8 @@ var vowFs = require('enb/lib/fs/async-fs'),
 
 module.exports = require('enb-bembundle/techs/css-chunks').buildFlow()
     .name('css-borschik-chunks')
+    .deprecated('enb-borschik', 'enb-bembundle', 'css-borschik-chunks',
+        'It will be removed from this package in the next major version')
     .defineOption('freeze', false)
     .defineOption('minify', false)
     .defineOption('tech', null)
