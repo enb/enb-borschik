@@ -21,11 +21,11 @@ var vow = require('vow'),
  * @param {Object}      [options]                  Options
  * @param {String}      [options.target]           Path to target with compiled file.
  * @param {String}      [options.source]           Path to source file which should be processed.
- * @param {String[]}    [options.dependantFiles]   Files with specified suffixes must be built before this tech execution.
+ * @param {String[]}    [options.dependantFiles]   Files with given suffixes must be built before this tech execution.
  * @param {Boolean}     [options.minify=true]      Minimize file during borschik processing.
  * @param {Boolean}     [options.freeze=false]     Freeze links to sources.
  * @param {Boolean}     [options.noCache=false]    Forcibly drop cache usage.
- * @param {String}      [options.tech]             Technology for borschik processing. By default it corresponds to source file extension.
+ * @param {String}      [options.tech]             Technology for borschik processing.
  * @param {Object}      [options.techOptions]      Params for 'tech' technology option
  *
  * @example
