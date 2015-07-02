@@ -13,8 +13,8 @@ var vow = require('vow'),
  *
  * Processes file with borschik tool (https://github.com/bem/borschik).
  *
- * Can be used for replace and freeze links to images, fonts e.t.c. inside *.css, *.js, *.html source files,
- * and compress source files.
+ * Can be used for replace and freeze links to images, fonts e.t.c. inside *.css, *.js, *.html files,
+ * and compress files.
  *
  * Also has ability to override links to *.js and *.css files inside bemtree templates
  *
