@@ -18,10 +18,10 @@ var vow = require('vow'),
  *
  * Also has ability to override links to *.js and *.css files inside bemtree templates
  *
- * @param {Object}      [options]                  Options
- * @param {String}      [options.target]           Path to target with compiled file.
- * @param {String}      [options.source]           Path to source file which should be processed.
- * @param {String[]}    [options.dependantFiles]   Files with given suffixes must be built before this tech execution.
+ * @param {Object}      options]                   Options
+ * @param {String}      options.target             Path to target with processed file.
+ * @param {String}      options.source             Path to source file which should be processed.
+ * @param {String[]}    [options.dependantFiles]   Files that must be built before this tech execution.
  * @param {Boolean}     [options.minify=true]      Minimize file during borschik processing.
  * @param {Boolean}     [options.freeze=false]     Freeze links to sources.
  * @param {Boolean}     [options.noCache=false]    Forcibly drop cache usage.
@@ -29,8 +29,7 @@ var vow = require('vow'),
  * @param {Object}      [options.techOptions]      Params for 'tech' technology option
  *
  * @example
- * var CssStylus = require('enb-stylus/techs/stylus'),
- *     CssAutoprefixer = require('enb-autoprefixer/techs/css-autoprefixer'),
+ * var Css = require('enb/techs/css'),
  *     Borschik = require('enb-borschik/techs/borschik'),
  *     FileProvideTech = require('enb/techs/file-provider'),
  *     bem = require('enb-bem-techs');
@@ -46,14 +45,7 @@ var vow = require('vow'),
  *         ]);
  *
  *         // build css file
- *         node.addTechs([
- *            [CssStylus, { target: '?.noprefix.css' }],
- *            [CssAutoprefixer, {
- *                sourceTarget: '?.noprefix.css',
- *                destTarget: '?.css',
- *                browserSupport: ['last 2 versions', 'ie 10', 'opera 12.16']
- *            }]
- *         ]);
+ *         node.addTechs(Css);
  *
  *         // minimize and freeze links inside *.css file by borschik
  *         node.addTech([Borschik, {
@@ -71,6 +63,7 @@ module.exports = require('enb/lib/build-flow').create()
     .name('borschik')
     .target('target')
     .useSourceFilename('source')
+    .defineRequiredOption('source')
     .useSourceListFilenames('dependantFiles')
     .optionAlias('target', 'destTarget')
     .optionAlias('source', 'sourceTarget')
