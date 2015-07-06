@@ -17,8 +17,8 @@ var EOL = require('os').EOL;
  * @param {String[]}    [options.sourceSuffixes=['js']]    Files with specified suffixes involved in the assembly.
  *
  * @example
- * var BrowserJs = require('enb-diverse-js/techs/browser-js'),
- *     BorschikJsInclude = require('enb-borschik/techs/js-borschik-include'),
+ * var BrowserJsTech = require('enb-diverse-js/techs/browser-js'),
+ *     BorschikJsIncludeTech = require('enb-borschik/techs/js-borschik-include'),
  *     FileProvideTech = require('enb/techs/file-provider'),
  *     bem = require('enb-bem-techs');
  *
@@ -33,12 +33,12 @@ var EOL = require('os').EOL;
  *         ]);
  *
  *         // build js file
- *         node.addTechs([BrowserJs, { target: '?.js' }]);
+ *         node.addTechs([BrowserJsTech, { target: '?.js' }]);
  *
  *         // open js include declarations
- *         node.addTech(BorschikJsInclude);
+ *         node.addTech(BorschikJsIncludeTech);
  *
- *         node.addTarget('_?.js');
+ *         node.addTarget('?.js');
  *     });
  * };
  */

@@ -18,7 +18,7 @@ var vow = require('vow'),
  *
  * Also has ability to override links to *.js and *.css files inside bemtree templates
  *
- * @param {Object}      options]                   Options
+ * @param {Object}      options                    Options
  * @param {String}      options.target             Path to target with processed file.
  * @param {String}      options.source             Path to source file which should be processed.
  * @param {String[]}    [options.dependantFiles]   Files that must be built before this tech execution.
@@ -29,8 +29,8 @@ var vow = require('vow'),
  * @param {Object}      [options.techOptions]      Params for 'tech' technology option
  *
  * @example
- * var Css = require('enb/techs/css'),
- *     Borschik = require('enb-borschik/techs/borschik'),
+ * var CssTech = require('enb/techs/css'),
+ *     BorschikTech = require('enb-borschik/techs/borschik'),
  *     FileProvideTech = require('enb/techs/file-provider'),
  *     bem = require('enb-bem-techs');
  *
@@ -45,10 +45,10 @@ var vow = require('vow'),
  *         ]);
  *
  *         // build css file
- *         node.addTechs(Css);
+ *         node.addTechs(CssTech);
  *
  *         // minimize and freeze links inside *.css file by borschik
- *         node.addTech([Borschik, {
+ *         node.addTech([BorschikTech, {
  *             source: '?.css',
  *             target: '_?.css',
  *             tech: 'cleancss',
