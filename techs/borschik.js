@@ -13,18 +13,20 @@ var vow = require('vow'),
  *
  * Processes file with borschik tool (https://github.com/bem/borschik).
  *
- * Can be used to replace and freeze links to images, fonts etc. inside *.css, *.js, *.html files,
- * and compress files.
+ * Can be used:
+ *
+ * - To replace and freeze links to images, fonts etc. inside *.css, *.js, *.html files,
+ * - To compress files.
  *
  * @param {Object}      options                    Options
- * @param {String}      options.target             Path to target with processed file.
- * @param {String}      options.source             Path to source file which should be processed.
- * @param {String[]}    [options.dependantFiles]   Files that must be built before this tech execution.
+ * @param {String}      options.target             Path to a target with processed file.
+ * @param {String}      options.source             Path to a source file which should be processed.
+ * @param {String[]}    [options.dependantFiles]   Files that must be built before borschik tech execution.
  * @param {Boolean}     [options.minify=true]      Minimize file during borschik processing.
  * @param {Boolean}     [options.freeze=false]     Freeze links to sources.
- * @param {Boolean}     [options.noCache=false]    Forcibly drop cache usage.
- * @param {String}      [options.tech]             Technology for borschik processing.
- * @param {Object}      [options.techOptions]      Params for 'tech' technology option
+ * @param {Boolean}     [options.noCache=false]    Drops cache usage forcibly.
+ * @param {String}      [options.tech]             Technology that should be processed with borschik.
+ * @param {Object}      [options.techOptions]      Params for 'tech' option
  *
  * @example
  * var CssTech = require('enb/techs/css'),

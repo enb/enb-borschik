@@ -6,15 +6,15 @@ var EOL = require('os').EOL;
  * @classdesc
  *
  * Collects js files declared by borschik (https://github.com/bem/borschik) includes.
- * It must be used in case if you use borschik include declarations in your js files.
+ * Use this technology to compile source files that contain borschik includes.
  *
- * More detail about this:
+ * More details:
  * https://en.bem.info/tools/optimizers/borschik/js-include
  * https://ru.bem.info/tools/optimizers/borschik/js-include
  *
  * @param {Object}      options                            Options
  * @param {String}      options.target                     Path to target with compiled file.
- * @param {String[]}    [options.sourceSuffixes=['js']]    Files with specified suffixes involved in the assembly.
+ * @param {String[]}    [options.sourceSuffixes=['js']]    Files with specified suffixes involved in the build process.
  *
  * @example
  * var BrowserJsTech = require('enb-diverse-js/techs/browser-js'),
