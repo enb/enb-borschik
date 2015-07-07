@@ -1,32 +1,47 @@
-/**
- * js-borschik-include
- * ===================
- *
- * Собирает *js*-файлы инклудами борщика, сохраняет в виде `?.js`.
- * Технология нужна, если в исходных *js*-файлах используются инклуды борщика.
- *
- * В последствии, получившийся файл `?.js` следует раскрывать с помощью технологии `borschik`.
- *
- * **Опции**
- *
- * * *String* **target** — Результирующий таргет. Обязательная опция.
- * * *String* **filesTarget** — files-таргет, на основе которого получается список исходных файлов
- *   (его предоставляет технология `files`). По умолчанию — `?.files`.
- * * *String[]* **sourceSuffixes** — суффиксы файлов, по которым строится files-таргет. По умолчанию — ['js'].
- *
- * **Пример**
- *
- * ```javascript
- * nodeConfig.addTechs([
- *     [ require('enb-borschik/techs/js-borschik-include') ],
- *     [ require('enb-borschik/techs/borschik'), {
- *         source: '?.js',
- *         target: '_?.js'
- *     } ]);
- * ]);
- * ```
- */
 var EOL = require('os').EOL;
+
+/**
+ * @class JSBorschikIncludeTech
+ * @augments {BaseTech}
+ * @classdesc
+ *
+ * Collects js files declared by borschik (https://github.com/bem/borschik) includes.
+ * Use this technology to compile source files that contain borschik includes.
+ *
+ * More details:
+ * https://en.bem.info/tools/optimizers/borschik/js-include
+ * https://ru.bem.info/tools/optimizers/borschik/js-include
+ *
+ * @param {Object}      options                            Options
+ * @param {String}      options.target                     Path to target with compiled file.
+ * @param {String[]}    [options.sourceSuffixes=['js']]    Files with specified suffixes involved in the build process.
+ *
+ * @example
+ * var BrowserJsTech = require('enb-diverse-js/techs/browser-js'),
+ *     BorschikJsIncludeTech = require('enb-borschik/techs/js-borschik-include'),
+ *     FileProvideTech = require('enb/techs/file-provider'),
+ *     bem = require('enb-bem-techs');
+ *
+ * module.exports = function(config) {
+ *     config.node('bundle', function(node) {
+ *         // get FileList
+ *         node.addTechs([
+ *             [FileProvideTech, { target: '?.bemdecl.js' }],
+ *             [bem.levels, levels: ['blocks']],
+ *             bem.deps,
+ *             bem.files
+ *         ]);
+ *
+ *         // build js file
+ *         node.addTechs([BrowserJsTech, { target: '?.js' }]);
+ *
+ *         // open js include declarations
+ *         node.addTech(BorschikJsIncludeTech);
+ *
+ *         node.addTarget('?.js');
+ *     });
+ * };
+ */
 module.exports = require('enb/lib/build-flow').create()
     .name('js-borschik-include')
     .target('target', '?.js')
