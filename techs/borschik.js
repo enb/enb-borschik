@@ -1,10 +1,4 @@
-var vow = require('vow'),
-    preprocessor = new (require('../lib/borschik-preprocessor'))(),
-    ProcessorSibling = require('sibling').declare({
-        process: function () {
-            return preprocessor.preprocessFile.apply(preprocessor, arguments);
-        }
-    });
+var path = require('path');
 
 /**
  * @class BorschikTech
@@ -78,23 +72,16 @@ module.exports = require('enb/lib/build-flow').create()
     .saver(function () {})
     .builder(function () {
         var node = this.node,
-            borschikProcessor = ProcessorSibling.fork();
+            jobQueue = this.node.getSharedResources().jobQueue;
 
-        return vow
-            .when(borschikProcessor.process(
+        return jobQueue.push(
+                path.resolve(__dirname, '../lib/borschik-preprocessor'),
                 node.resolvePath(this._source),
                 node.resolvePath(this._target),
                 this._freeze,
                 this._minify,
                 this._tech,
                 this._techOptions
-            ))
-            .then(function () {
-                borschikProcessor.dispose();
-            })
-            .fail(function (err) {
-                borschikProcessor.dispose();
-                throw err;
-            });
+            );
     })
     .createTech();
