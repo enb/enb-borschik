@@ -1,6 +1,6 @@
 {
   "name": "enb-borschik",
-  "version": "1.5.1",
+  "version": "1.6.0-beta1",
   "repository": {
     "type": "git",
     "url": "git://github.com/enb-make/enb-borschik.git"
