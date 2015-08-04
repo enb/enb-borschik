@@ -28,7 +28,7 @@
  * ```
  */
 var vowFs = require('enb/lib/fs/async-fs'),
-    BorschikPreprocessor = require('../lib/borschik-preprocessor');
+    borschik = require('borschik');
 
 module.exports = require('enb-bembundle/techs/css-chunks').buildFlow()
     .name('css-borschik-chunks')
@@ -41,14 +41,20 @@ module.exports = require('enb-bembundle/techs/css-chunks').buildFlow()
         processChunkData: function (sourceFilename) {
             var _this = this,
                 target = this._target;
+
             return this.node.createTmpFileForTarget(target).then(function (tmpFile) {
-                return (new BorschikPreprocessor()).preprocessFile(
-                    sourceFilename, tmpFile, _this._freeze, _this._minify, _this._tech
-                ).then(function () {
-                    return vowFs.read(tmpFile, 'utf8').then(function (data) {
-                        vowFs.remove(tmpFile);
-                        return data;
-                    });
+                return borschik.api({
+                        input: sourceFilename,
+                        output: tmpFile,
+                        freeze: _this._freeze,
+                        minimize: _this._minify,
+                        tech: _this._tech
+                    })
+                    .then(function () {
+                        return vowFs.read(tmpFile, 'utf8').then(function (data) {
+                            vowFs.remove(tmpFile);
+                            return data;
+                        });
                 });
             });
         }
