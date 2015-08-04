@@ -72,16 +72,17 @@ module.exports = require('enb/lib/build-flow').create()
     .saver(function () {})
     .builder(function () {
         var node = this.node,
+            modulePath = path.resolve(__dirname, '../lib/borschik-api'),
+            opts = {
+                input: node.resolvePath(this._source),
+                output: node.resolvePath(this._target),
+                freeze: this._freeze,
+                minimize: this._minify,
+                tech: this._tech,
+                techOptions: this._techOptions
+            },
             jobQueue = this.node.getSharedResources().jobQueue;
 
-        return jobQueue.push(
-                path.resolve(__dirname, '../lib/borschik-preprocessor'),
-                node.resolvePath(this._source),
-                node.resolvePath(this._target),
-                this._freeze,
-                this._minify,
-                this._tech,
-                this._techOptions
-            );
+        return jobQueue.push(modulePath, opts);
     })
     .createTech();
