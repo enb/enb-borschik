@@ -23,33 +23,36 @@ var path = require('path');
  * @param {Object}      [options.techOptions]      Params for 'tech' option
  *
  * @example
- * var CssTech = require('enb/techs/css'),
- *     BorschikTech = require('enb-borschik/techs/borschik'),
- *     FileProvideTech = require('enb/techs/file-provider'),
- *     bem = require('enb-bem-techs');
+ * var BorschikTech = require('enb-bh/techs/borschik'),
+ *     FileProvideTech = require('enb/techs/file-provider');
  *
  * module.exports = function(config) {
- *     config.node('bundle', function(node) {
- *         // get FileList
- *         node.addTechs([
- *             [FileProvideTech, { target: '?.bemdecl.js' }],
- *             [bem.levels, levels: ['blocks']],
- *             bem.deps,
- *             bem.files
- *         ]);
+ *     // build CSS file with `.dev.css` extension
  *
- *         // build css file
- *         node.addTechs(CssTech);
+ *     // in dev mode process CSS-file using `borschik`
+ *     config.mode('development', function () {
+ *         config.node('bundle', function (node) {
+ *             node.addTech([BorschikTech, {
+ *                 source: '?.dev.css',
+ *                 target: '?.css',
+ *                 minify: false,
+ *                 freeze: true
+ *             }]);
+ *         });
+ *     });
  *
- *         // minimize and freeze links inside *.css file by borschik
- *         node.addTech([BorschikTech, {
- *             source: '?.css',
- *             target: '_?.css',
- *             tech: 'cleancss',
- *             freeze: true,
- *             minify: true
- *         }]);
- *         node.addTarget('_?.css');
+ *     // in production mode process CSS-file using `borschik`
+ *     // and minimize it using `cleancss`
+ *     config.mode('production', function () {
+ *         config.node('bundle', function (node) {
+ *             node.addTech([BorschikTech, {
+ *                 source: '?.dev.css',
+ *                 target: '?.css',
+ *                 minify: true,
+ *                 freeze: true,
+ *                 tech: 'cleancss'
+ *             }]);
+ *         });
  *     });
  * };
  */
