@@ -15,7 +15,7 @@
  * * *String* **filesTarget** — files-таргет, на основе которого получается список исходных файлов
  *   (его предоставляет технология `files`). По умолчанию — `?.files`.
  * * *Boolean* **minify** — Минифицировать ли в процессе обработки. По умолчанию — `true`.
- * * *Boolean* **freeze** — Использовать ли фризинг в процессе обработки. По умолчанию — `false`.
+ * * *Boolean* **freeze** — Использовать ли фризинг в процессе обработки. По умолчанию — `true`.
  * * *String* **tech** — Технология сборки. По умолчанию — соответствует расширению исходного таргета.
  *
  * **Пример**
@@ -23,7 +23,7 @@
  * ```javascript
  * nodeConfig.addTech([ require('enb-borschik/techs/css-borschik-chunks'), {
  *   minify: true,
- *   freeze: true
+ *   freeze: false
  * } ]);
  * ```
  */
@@ -34,7 +34,7 @@ module.exports = require('enb-bembundle/techs/css-chunks').buildFlow()
     .name('css-borschik-chunks')
     .deprecated('enb-borschik', 'enb-bembundle', 'css-borschik-chunks',
         'It will be removed from this package in the next major version')
-    .defineOption('freeze', false)
+    .defineOption('freeze', true)
     .defineOption('minify', false)
     .defineOption('tech', null)
     .methods({
