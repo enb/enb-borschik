@@ -22,7 +22,7 @@ borschik
 * *String* **destTarget** — Результирующий таргет. Например, `_?.js`. Обязательная опция.
 * *String* **dependantFiles** — Замораживаемые борщиком файлы. Например `['?.css', '?.js']`.
 * *Boolean* **minify** — Минифицировать ли в процессе обработки. По умолчанию — `true`.
-* *Boolean* **freeze** — Использовать ли фризинг в процессе обработки. По умолчанию — `false`.
+* *Boolean* **freeze** — Использовать ли фризинг в процессе обработки. По умолчанию — `true`.
 * *String* **tech** — Технология сборки. По умолчанию — соответствует расширению исходного таргета.
 * *Object* **techOptions** — Параметры для технологии сборки. Возможные значения зависият от конкретной технологии.
 
@@ -33,7 +33,7 @@ nodeConfig.addTech([ require('enb-borschik/techs/borschik'), {
   sourceTarget: '?.css',
   destTarget: '_?.css',
   minify: true,
-  freeze: true,
+  freeze: false,
   tech: 'css+'
 } ]);
 ```
@@ -55,7 +55,7 @@ css-borschik-chunks
 * *String* **filesTarget** — files-таргет, на основе которого получается список исходных файлов
   (его предоставляет технология `files`). По умолчанию — `?.files`.
 * *Boolean* **minify** — Минифицировать ли в процессе обработки. По умолчанию — `true`.
-* *Boolean* **freeze** — Использовать ли фризинг в процессе обработки. По умолчанию — `false`.
+* *Boolean* **freeze** — Использовать ли фризинг в процессе обработки. По умолчанию — `true`.
 * *String* **tech** — Технология сборки. По умолчанию — соответствует расширению исходного таргета.
 
 **Пример**
@@ -63,7 +63,7 @@ css-borschik-chunks
 ```javascript
 nodeConfig.addTech([ require('enb-borschik/techs/css-borschik-chunks'), {
   minify: true,
-  freeze: true
+  freeze: false
 } ]);
 ```
 

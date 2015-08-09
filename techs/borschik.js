@@ -17,7 +17,7 @@ var path = require('path');
  * @param {String}      options.source             Path to a source file which should be processed.
  * @param {String[]}    [options.dependantFiles]   Files that must be built before borschik tech execution.
  * @param {Boolean}     [options.minify=true]      Minimize file during borschik processing.
- * @param {Boolean}     [options.freeze=false]     Freeze links to sources.
+ * @param {Boolean}     [options.freeze=true]      Freeze links to sources.
  * @param {Boolean}     [options.noCache=false]    Drops cache usage forcibly.
  * @param {String}      [options.tech]             Technology that should be processed with borschik.
  * @param {Object}      [options.techOptions]      Params for 'tech' option
@@ -46,7 +46,6 @@ var path = require('path');
  *             source: '?.css',
  *             target: '_?.css',
  *             tech: 'cleancss',
- *             freeze: true,
  *             minify: true
  *         }]);
  *         node.addTarget('_?.css');
@@ -62,7 +61,7 @@ module.exports = require('enb/lib/build-flow').create()
     .optionAlias('target', 'destTarget')
     .optionAlias('source', 'sourceTarget')
     .defineOption('minify', true)
-    .defineOption('freeze', false)
+    .defineOption('freeze', true)
     .defineOption('noCache', false)
     .defineOption('tech', null)
     .defineOption('techOptions', null)
