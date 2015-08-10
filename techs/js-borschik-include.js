@@ -12,12 +12,12 @@ var EOL = require('os').EOL;
  * https://en.bem.info/tools/optimizers/borschik/js-include
  * https://ru.bem.info/tools/optimizers/borschik/js-include
  *
- * @param {Object}      options                            Options
- * @param {String}      options.target                     Path to target with compiled file.
+ * @param {Object}      [options]                          Options
+ * @param {String}      [options.target=js]                Path to target with compiled file.
  * @param {String[]}    [options.sourceSuffixes=['js']]    Files with specified suffixes involved in the build process.
  *
  * @example
- * var BrowserJsTech = require('enb-diverse-js/techs/browser-js'),
+ * var BorschikTech = require('enb-borschik/techs/borschik'),
  *     BorschikJsIncludeTech = require('enb-borschik/techs/js-borschik-include'),
  *     FileProvideTech = require('enb/techs/file-provider'),
  *     bem = require('enb-bem-techs');
@@ -32,12 +32,16 @@ var EOL = require('os').EOL;
  *             bem.files
  *         ]);
  *
- *         // build js file
- *         node.addTechs([BrowserJsTech, { target: '?.js' }]);
- *
- *         // open js include declarations
- *         node.addTech(BorschikJsIncludeTech);
- *
+ *         node.addTechs([
+ *             // build JS file with `borschik:include`
+ *             [BorschikJsIncludeTech, { target: '?.pre.js' }],
+ *             // process JS file, open `borschik:include` notations
+ *             [BorschikTech, {
+ *                 target: '?.js',
+ *                 source: '?.pre.js',
+ *                 freeze: true
+ *             }]
+ *         ]);
  *         node.addTarget('?.js');
  *     });
  * };
