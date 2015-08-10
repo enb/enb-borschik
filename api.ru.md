@@ -23,11 +23,11 @@ borschik
 
 * [source](#source)
 * [target](#target)
-* [dependantFiles](#dependantFiles)
+* [dependantFiles](#dependantfiles)
 * [minify](#minify)
 * [freeze](#freeze)
 * [tech](#tech)
-* [techOptions](#techOptions)
+* [techOptions](#techoptions)
 
 ### source
 
@@ -123,14 +123,9 @@ js-borschik-include
 
 **Опции**
 
-* [target](#target-2)
-* [filesTarget](#filesTarget)
-* [sourceSuffixes](#sourceSuffixes)
-
-* *String* **target** — Результирующий таргет. Обязательная опция.
-* *String* **filesTarget** — files-таргет, на основе которого получается список исходных файлов
- (его предоставляет технология `files`). По умолчанию — `?.files`.
-* *String[]* **sourceSuffixes** — суффиксы файлов, по которым строится files-таргет. По умолчанию — ['js'].
+* [target](#target-1)
+* [filesTarget](#filestarget)
+* [sourceSuffixes](#sourcesuffixes)
 
 #### target
 
