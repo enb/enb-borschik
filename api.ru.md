@@ -76,7 +76,7 @@ borschik
 **Пример**
 
 ```javascript
-var BorschikTech = require('enb-bh/techs/borschik'),
+var BorschikTech = require('enb-borschik/techs/borschik'),
     FileProvideTech = require('enb/techs/file-provider');
 
 module.exports = function(config) {

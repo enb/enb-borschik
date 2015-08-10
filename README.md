@@ -10,7 +10,7 @@ enb-borschik
 
 **Технологии пакета `enb-borschik`:**
 
-* [bh-bundle](api.ru.md#borschik)
+* [borschik](api.ru.md#borschik)
 * [js-borschik-include](api.ru.md#js-borschik-include)
 
 Принципы работы технологий и их API описаны в документе [API технологий](api.ru.md).
