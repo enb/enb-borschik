@@ -38,8 +38,7 @@ var EOL = require('os').EOL;
  *             // process JS file, open `borschik:include` notations
  *             [BorschikTech, {
  *                 target: '?.js',
- *                 source: '?.pre.js',
- *                 freeze: true
+ *                 source: '?.pre.js'
  *             }]
  *         ]);
  *         node.addTarget('?.js');
