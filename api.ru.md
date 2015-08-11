@@ -55,7 +55,7 @@ borschik
 
 #### freeze
 
-Тип: `Boolean`. По умолчанию: `false`.
+Тип: `Boolean`. По умолчанию: `true`.
 
 Включает [freeze](https://ru.bem.info/tools/optimizers/borschik/freeze/) при обработке исходного файла.
 
@@ -88,8 +88,7 @@ module.exports = function(config) {
             node.addTech([BorschikTech, {
                 source: '?.dev.css',
                 target: '?.css',
-                minify: false,
-                freeze: true
+                minify: false
             }]);
         });
     });
@@ -102,7 +101,6 @@ module.exports = function(config) {
                 source: '?.dev.css',
                 target: '?.css',
                 minify: true,
-                freeze: true,
                 tech: 'cleancss'
             }]);
         });
@@ -170,8 +168,7 @@ module.exports = function(config) {
             // Обрабатываем собранный JS-файл, раскрываем найденные `borschik:include`
             [BorschikTech, {
                 target: '?.js',
-                source: '?.pre.js',
-                freeze: true
+                source: '?.pre.js'
             }]
         ]);
         node.addTarget('?.js');
