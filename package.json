@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "borschik": "1.4.1",
-    "enb-bembundle": "1.0.0",
     "inherit": "2.2.2",
     "vow": "0.4.10"
   },
