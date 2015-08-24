@@ -26,10 +26,10 @@
   },
   "devDependencies": {
     "borschik-tech-cleancss": "2.0.1",
-    "bower": "1.4.1",
+    "bower": "1.5.1",
     "enb": ">= 0.16.0 < 1.0.0",
     "fs-extra": "0.23.1",
-    "istanbul": "0.3.17",
+    "istanbul": "0.3.18",
     "jscs": "1.13.1",
     "jshint": "2.8.0",
     "mocha": "2.2.5",
