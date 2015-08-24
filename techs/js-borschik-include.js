@@ -20,16 +20,16 @@ var EOL = require('os').EOL;
  * var BorschikTech = require('enb-borschik/techs/borschik'),
  *     BorschikJsIncludeTech = require('enb-borschik/techs/js-borschik-include'),
  *     FileProvideTech = require('enb/techs/file-provider'),
- *     bem = require('enb-bem-techs');
+ *     bemTechs = require('enb-bem-techs');
  *
  * module.exports = function(config) {
  *     config.node('bundle', function(node) {
  *         // get FileList
  *         node.addTechs([
  *             [FileProvideTech, { target: '?.bemdecl.js' }],
- *             [bem.levels, levels: ['blocks']],
- *             bem.deps,
- *             bem.files
+ *             [bemTechs.levels, levels: ['blocks']],
+ *             bemTechs.deps,
+ *             bemTechs.files
  *         ]);
  *
  *         node.addTechs([
