@@ -1,4 +1,6 @@
-var path = require('path');
+var path = require('path'),
+    enb = require('enb'),
+    buildFlow = enb.buildFlow || require('enb/lib/build-flow');
 
 /**
  * @class BorschikTech
@@ -56,7 +58,7 @@ var path = require('path');
  *     });
  * };
  */
-module.exports = require('enb/lib/build-flow').create()
+module.exports = buildFlow.create()
     .name('borschik')
     .target('target')
     .useSourceFilename('source')

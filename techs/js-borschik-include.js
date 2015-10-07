@@ -1,4 +1,6 @@
-var EOL = require('os').EOL;
+var EOL = require('os').EOL,
+    enb = require('enb'),
+    buildFlow = enb.buildFlow || require('enb/lib/build-flow');
 
 /**
  * @class JSBorschikIncludeTech
@@ -45,7 +47,7 @@ var EOL = require('os').EOL;
  *     });
  * };
  */
-module.exports = require('enb/lib/build-flow').create()
+module.exports = buildFlow.create()
     .name('js-borschik-include')
     .target('target', '?.js')
     .useFileList(['js'])

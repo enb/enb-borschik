@@ -4,6 +4,7 @@ var EOL = require('os').EOL,
     fsExtra = require('fs-extra'),
     FileList = require('enb/lib/file-list'),
     MockNode = require('mock-enb/lib/mock-node'),
+    loadDirSync = require('mock-enb/utils/dir-utils').loadDirSync,
     Tech = require('../../techs/js-borschik-include');
 
 describe('js-borschik-include', function () {
@@ -50,7 +51,7 @@ describe('js-borschik-include', function () {
             fs.writeFileSync(path.join(FOLDER.blocks, item), scheme[item], { encoding: 'utf-8' });
         });
 
-        fileList.loadFromDirSync('blocks');
+        fileList.addFiles(loadDirSync('blocks'));
         bundle.provideTechData('?.files', fileList);
 
         return bundle.runTechAndGetContent(Tech);
