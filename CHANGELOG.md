@@ -1,6 +1,11 @@
 История изменений
 =================
 
+2.1.0
+-----
+
+* Добавлена поддержка `enb` версии `1.x` ([#43]).
+
 2.0.0
 -----
 
@@ -23,6 +28,7 @@
 * Модуль `vow@0.4.3` обновлен до версии `0.4.10`.
 * Модуль `inherit@2.2.1` обновлен до версии `2.2.2`.
 
+[#43]: https://github.com/enb-make/enb-borschik/pull/43
 [#38]: https://github.com/enb-make/enb-borschik/issues/38
 [#37]: https://github.com/enb-make/enb-borschik/issues/37
 [#32]: https://github.com/enb-make/enb-borschik/pull/32
