@@ -16,7 +16,7 @@ describe('borschik', function () {
 
     afterEach(function () {
         clearConfigCache();
-        fsExtra.deleteSync(TEST_DATA_FOLDER);
+        fsExtra.removeSync(TEST_DATA_FOLDER);
     });
 
     describe('css', function () {

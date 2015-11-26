@@ -19,8 +19,8 @@ describe('js-borschik-include', function () {
     });
 
     afterEach(function () {
-        fsExtra.deleteSync(FOLDER.blocks);
-        fsExtra.deleteSync(FOLDER.bundle);
+        fsExtra.removeSync(FOLDER.blocks);
+        fsExtra.removeSync(FOLDER.bundle);
     });
 
     it('must join files with borschik includes', function () {
