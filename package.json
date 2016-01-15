@@ -20,7 +20,7 @@
     "enb": ">= 0.16.0 < 2.0.0"
   },
   "dependencies": {
-    "borschik": "1.5.0",
+    "borschik": "1.5.1",
     "inherit": "2.2.2",
     "vow": "0.4.11"
   },
