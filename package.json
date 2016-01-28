@@ -16,6 +16,7 @@
       "url": "https://github.com/enb-make/enb-borschik/blob/master/LICENSE.txt"
     }
   ],
+  "main": "index.js",
   "peerDependencies": {
     "enb": ">= 0.16.0 < 2.0.0"
   },
