@@ -52,7 +52,7 @@ describe('borschik', function () {
                 });
 
             return build(scheme, options).then(function (content) {
-                content.must.equal('.block{background-image:url("/borschik/a/b.gif")}');
+                content.must.equal('.block{background-image:url(/borschik/a/b.gif)}');
             });
         });
 
@@ -94,7 +94,7 @@ describe('borschik', function () {
 
             return build(scheme, options).then(function (content) {
                 content.must.equal(
-                    '.block{background-image:url("freeze/Ck1VqNd45QIvq3AZd8XYQLvEhtA.gif")}');
+                    '.block{background-image:url(freeze/Ck1VqNd45QIvq3AZd8XYQLvEhtA.gif)}');
             });
         });
 
