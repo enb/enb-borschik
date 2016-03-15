@@ -1,6 +1,11 @@
 История изменений
 =================
 
+2.3.1
+-----
+
+* Модуль `borschik@1.5.2` обновлен до версии `1.5.3`: исправлена обработка ошибок для `enb` ([#borschik-112]).
+
 2.3.0
 -----
 
@@ -72,6 +77,7 @@ var borschik = require('enb-borschik').borschik;
 * Модуль `vow@0.4.3` обновлен до версии `0.4.10`.
 * Модуль `inherit@2.2.1` обновлен до версии `2.2.2`.
 
+[#borschik-112]: https://github.com/bem/borschik/pull/112
 [#43]: https://github.com/enb-make/enb-borschik/pull/43
 [#38]: https://github.com/enb-make/enb-borschik/issues/38
 [#37]: https://github.com/enb-make/enb-borschik/issues/37
