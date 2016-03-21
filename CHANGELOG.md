@@ -68,7 +68,7 @@ var borschik = require('enb-borschik').borschik;
 
 * [ __*major*__ ] [freeze](api.ru.md#freeze) включен по умолчанию и будет работать только при наличии конфигурационного файла `.borschik` ([#37]).
 * Добавлена опция [dependantFiles](api.ru.md#dependantfiles) ([#24]). Она необходима для случаев, когда обрабатываемый файл зависит от других собираемых файлов (например, для обработки HTML-файла могут понадобиться CSS- и JS-файлы).
-* Для ускорения сборки вместо модуля `sibling` используется [общая очередь дочерних процессов](https://github.com/enb-make/enb#nodegetsharedresources) ([#32]).
+* Для ускорения сборки вместо модуля `sibling` используется [общая очередь дочерних процессов](https://github.com/enb/enb#nodegetsharedresources) ([#32]).
 
 ### Зависимости
 
@@ -78,10 +78,10 @@ var borschik = require('enb-borschik').borschik;
 * Модуль `inherit@2.2.1` обновлен до версии `2.2.2`.
 
 [#borschik-112]: https://github.com/bem/borschik/pull/112
-[#43]: https://github.com/enb-make/enb-borschik/pull/43
-[#38]: https://github.com/enb-make/enb-borschik/issues/38
-[#37]: https://github.com/enb-make/enb-borschik/issues/37
-[#32]: https://github.com/enb-make/enb-borschik/pull/32
-[#24]: https://github.com/enb-make/enb-borschik/issues/24
-[#20]: https://github.com/enb-make/enb-borschik/issues/20
-[#14]: https://github.com/enb-make/enb-borschik/issues/14
+[#43]: https://github.com/enb/enb-borschik/pull/43
+[#38]: https://github.com/enb/enb-borschik/issues/38
+[#37]: https://github.com/enb/enb-borschik/issues/37
+[#32]: https://github.com/enb/enb-borschik/pull/32
+[#24]: https://github.com/enb/enb-borschik/issues/24
+[#20]: https://github.com/enb/enb-borschik/issues/20
+[#14]: https://github.com/enb/enb-borschik/issues/14

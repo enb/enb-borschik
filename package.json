@@ -3,17 +3,17 @@
   "version": "2.3.1",
   "repository": {
     "type": "git",
-    "url": "git://github.com/enb-make/enb-borschik.git"
+    "url": "git://github.com/enb/enb-borschik.git"
   },
   "author": "Marat Dulin",
   "bugs": {
-    "url": "https://github.com/enb-make/enb-borschik/issues"
+    "url": "https://github.com/enb/enb-borschik/issues"
   },
-  "homepage": "https://github.com/enb-make/enb-borschik",
+  "homepage": "https://github.com/enb/enb-borschik",
   "licenses": [
     {
       "type": "MPL-2.0",
-      "url": "https://github.com/enb-make/enb-borschik/blob/master/LICENSE.txt"
+      "url": "https://github.com/enb/enb-borschik/blob/master/LICENSE.txt"
     }
   ],
   "main": "index.js",
