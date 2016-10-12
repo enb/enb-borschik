@@ -63,7 +63,6 @@ module.exports = buildFlow.create()
     .target('target')
     .useSourceFilename('source')
     .defineRequiredOption('source')
-    .useSourceListFilenames('dependantFiles')
     .optionAlias('target', 'destTarget')
     .optionAlias('source', 'sourceTarget')
     .defineOption('minify', true)
@@ -71,6 +70,7 @@ module.exports = buildFlow.create()
     .defineOption('noCache', false)
     .defineOption('tech', null)
     .defineOption('techOptions', null)
+    .defineOption('dependantFiles', [])
     .needRebuild(function () {
         return this._noCache;
     })
@@ -86,8 +86,22 @@ module.exports = buildFlow.create()
                 tech: this._tech,
                 techOptions: this._techOptions
             },
-            jobQueue = this.node.getSharedResources().jobQueue;
+            jobQueue = this.node.getSharedResources().jobQueue,
+            sourcesByNodes = this._dependantFiles.reduce(function (acc, dependancy) {
+                if (typeof dependancy === 'object') {
+                    return dependancy;
+                }
 
-        return jobQueue.push(modulePath, opts);
+                var nodePath = node.getPath();
+
+                acc[nodePath] || (acc[nodePath] = []);
+                acc[nodePath].push(dependancy);
+
+                return acc;
+            }, {});
+
+        return node.requireNodeSources(sourcesByNodes).then(function () {
+            return jobQueue.push(modulePath, opts);
+        });
     })
     .createTech();
