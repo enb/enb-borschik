@@ -21,14 +21,15 @@
     "enb": ">= 0.16.0 < 2.0.0"
   },
   "dependencies": {
-    "borschik": "1.6.0",
+    "borschik": "borschik/borschik#wip-cache",
+    "coa": "^1.0.1",
     "inherit": "2.2.3",
     "vow": "0.4.12"
   },
   "devDependencies": {
     "borschik-tech-cleancss": "2.1.0",
     "bower": "1.7.7",
-    "enb": ">= 0.16.0 < 2.0.0",
+    "enb": "enb/enb#feat/file-cache",
     "fs-extra": "0.26.6",
     "istanbul": "0.4.2",
     "jscs": "2.11.0",
