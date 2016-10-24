@@ -77,6 +77,9 @@ module.exports = buildFlow.create()
     .saver(function () {})
     .builder(function () {
         var node = this.node,
+            makePlatform =  node._makePlatform,
+            configDir = makePlatform && makePlatform._getConfigDir(),
+            tmpDir = path.join(configDir || '', 'tmp', 'borschik'),
             modulePath = path.resolve(__dirname, '../lib/borschik-api'),
             opts = {
                 input: node.resolvePath(this._source),
@@ -84,7 +87,8 @@ module.exports = buildFlow.create()
                 freeze: this._freeze,
                 minimize: this._minify,
                 tech: this._tech,
-                techOptions: this._techOptions
+                techOptions: this._techOptions,
+                tmpDir: tmpDir
             },
             jobQueue = this.node.getSharedResources().jobQueue;
 
