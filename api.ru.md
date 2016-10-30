@@ -26,6 +26,7 @@ borschik
 * [dependantFiles](#dependantfiles)
 * [minify](#minify)
 * [freeze](#freeze)
+* [cache](#cache)
 * [tech](#tech)
 * [techOptions](#techoptions)
 
@@ -58,6 +59,16 @@ borschik
 Тип: `Boolean`. По умолчанию: `true`.
 
 Включает [freeze](https://ru.bem.info/tools/optimizers/borschik/freeze/) при обработке исходного файла.
+
+#### cache
+
+Тип: `Boolean`. По умолчанию: `false`.
+
+Включает файловый кэш борщика.
+
+**Важно:** при сборке без использования кэша (например, при первой сборке) замедляет общее время сборки. Это связано с тем, что `borschik` имеет синхронное API при работе с файловой системой.
+
+Временные файлы записываются в `.enb/tmp`.
 
 #### tech
 

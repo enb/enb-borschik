@@ -20,6 +20,7 @@ var path = require('path'),
  * @param {String[]}    [options.dependantFiles]   Files that must be built before borschik tech execution.
  * @param {Boolean}     [options.minify=true]      Minimize file during borschik processing.
  * @param {Boolean}     [options.freeze=true]      Freeze links to sources.
+ * @param {Boolean}     [options.cache=false]      Use borschik file cache.
  * @param {String}      [options.tech]             Technology that should be processed with borschik.
  * @param {Object}      [options.techOptions]      Params for 'tech' option
  *
@@ -67,6 +68,7 @@ module.exports = buildFlow.create()
     .optionAlias('source', 'sourceTarget')
     .defineOption('minify', true)
     .defineOption('freeze', true)
+    .defineOption('cache', false)
     .defineOption('tech', null)
     .defineOption('techOptions', null)
     .needRebuild(function () {
@@ -86,6 +88,7 @@ module.exports = buildFlow.create()
                 minimize: this._minify,
                 tech: this._tech,
                 techOptions: this._techOptions,
+                cache: this._cache,
                 tmpDir: tmpDir
             },
             jobQueue = this.node.getSharedResources().jobQueue;
