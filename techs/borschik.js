@@ -21,6 +21,7 @@ var path = require('path'),
  * @param {Boolean}     [options.minify=true]      Minimize file during borschik processing.
  * @param {Boolean}     [options.freeze=true]      Freeze links to sources.
  * @param {Boolean}     [options.cache=false]      Use borschik file cache.
+ * @param {Boolean}     [options.enbCache=false]   Use ENB cache.
  * @param {String}      [options.tech]             Technology that should be processed with borschik.
  * @param {Object}      [options.techOptions]      Params for 'tech' option
  *
@@ -69,10 +70,11 @@ module.exports = buildFlow.create()
     .defineOption('minify', true)
     .defineOption('freeze', true)
     .defineOption('cache', false)
+    .defineOption('enbCache', false)
     .defineOption('tech', null)
     .defineOption('techOptions', null)
     .needRebuild(function () {
-        return true;
+        return !this._enbCache;
     })
     .saver(function () {})
     .builder(function () {
