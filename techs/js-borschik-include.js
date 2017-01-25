@@ -59,7 +59,8 @@ module.exports = buildFlow.create()
             });
 
         return files.map(function (file) {
-            return wrapper(file, prefixString + '/*borschik:include:' + this.node.relativePath(file.fullname) + '*/' + postfixString);
+            var filepath = this.node.relativePath(file.fullname);
+            return wrapper(file, prefixString + '/*borschik:include:' + filepath + '*/' + postfixString);
         }, this).join(EOL);
     })
     .createTech();

@@ -43,7 +43,43 @@ describe('js-borschik-include', function () {
         });
     });
 
-    function build(scheme) {
+    it('must work with prefixString option correctly', function () {
+        var scheme = {
+                'block1.js': 'var block1 = "block1";',
+                'block2.js': 'var block2 = "block2";'
+            },
+            options = {
+                prefixString: '/*foobar*/'
+            };
+
+        return build(scheme, options).spread(function (content) {
+            content.must.equal([
+                '/*foobar*//*borschik:include:../blocks/block1.js*/',
+                '/*foobar*//*borschik:include:../blocks/block2.js*/'
+            ].join(EOL));
+        });
+    });
+
+    it('must work with wrapper option correctly', function () {
+        var scheme = {
+                'block1.js': 'var block1 = "block1";',
+                'block2.js': 'var block2 = "block2";'
+            },
+            options = {
+                wrapper: function (file, content) {
+                    return '/*foobar(' + file.fullname + ')*/' + content;
+                }
+            };
+
+        return build(scheme, options).spread(function (content) {
+            content.must.equal([
+                '/*foobar(blocks/block1.js)*//*borschik:include:../blocks/block1.js*/',
+                '/*foobar(blocks/block2.js)*//*borschik:include:../blocks/block2.js*/'
+            ].join(EOL));
+        });
+    });
+
+    function build(scheme, options) {
         var bundle = new MockNode('bundle'),
             fileList = new FileList();
 
@@ -54,6 +90,6 @@ describe('js-borschik-include', function () {
         fileList.addFiles(loadDirSync('blocks'));
         bundle.provideTechData('?.files', fileList);
 
-        return bundle.runTechAndGetContent(Tech);
+        return bundle.runTechAndGetContent(Tech, options);
     }
 });
