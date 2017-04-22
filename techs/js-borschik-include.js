@@ -52,8 +52,15 @@ module.exports = buildFlow.create()
     .target('target', '?.js')
     .useFileList(['js'])
     .builder(function (files) {
+        var prefixString = this.getOption('prefixString', ''),
+            postfixString = this.getOption('postfixString', ''),
+            wrapper = this.getOption('wrapper', function (file, content) {
+                return content;
+            });
+
         return files.map(function (file) {
-            return '/*borschik:include:' + this.node.relativePath(file.fullname) + '*/';
+            var filepath = this.node.relativePath(file.fullname);
+            return wrapper(file, prefixString + '/*borschik:include:' + filepath + '*/' + postfixString);
         }, this).join(EOL);
     })
     .createTech();
