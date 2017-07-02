@@ -26,6 +26,7 @@ borschik
 * [dependantFiles](#dependantfiles)
 * [minify](#minify)
 * [freeze](#freeze)
+* [comments](#comments)
 * [tech](#tech)
 * [techOptions](#techoptions)
 
@@ -77,6 +78,12 @@ borschik
 Тип: `Boolean`. По умолчанию: `true`.
 
 Включает [freeze](https://ru.bem.info/tools/optimizers/borschik/freeze/) при обработке исходного файла.
+
+#### comments
+
+Тип: `Boolean`. По умолчанию: `true`.
+
+Позволяет настраивать опцию `comments` пакета `borschik`, которая отвечает за поясняющие комментарии к склеенным файлам.
 
 #### tech
 
