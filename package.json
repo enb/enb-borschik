@@ -21,22 +21,22 @@
     "enb": ">= 0.16.0 < 2.0.0"
   },
   "dependencies": {
-    "borschik": "1.7.0",
+    "borschik": "1.7.1",
     "inherit": "2.2.6",
-    "vow": "0.4.15"
+    "vow": "0.4.16"
   },
   "devDependencies": {
     "borschik-tech-cleancss": "2.1.0",
-    "bower": "1.7.7",
+    "bower": "1.8.0",
     "enb": ">= 0.16.0 < 2.0.0",
     "fs-extra": "0.26.6",
-    "istanbul": "0.4.2",
+    "istanbul": "0.4.5",
     "jscs": "2.11.0",
-    "jshint": "2.9.1",
-    "mocha": "2.4.5",
-    "mock-enb": "0.3.1",
-    "mock-require": "1.2.1",
-    "must": "0.13.1"
+    "jshint": "2.9.5",
+    "mocha": "3.4.2",
+    "mock-enb": "0.3.6",
+    "mock-require": "2.0.2",
+    "must": "0.13.4"
   },
   "scripts": {
     "test": "npm run lint && npm run unit",
