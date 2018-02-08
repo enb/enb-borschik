@@ -16,6 +16,7 @@ var EOL = require('os').EOL,
  *
  * @param {Object}      [options]                          Options
  * @param {String}      [options.target=js]                Path to target with compiled file.
+ * @param {String}      [options.includePrefix='borschik:include:'] String to define borschik includes.
  * @param {String[]}    [options.sourceSuffixes=['js']]    Files with specified suffixes involved in the build process.
  *
  * @example
@@ -51,9 +52,12 @@ module.exports = buildFlow.create()
     .name('js-borschik-include')
     .target('target', '?.js')
     .useFileList(['js'])
+    .defineOption('includePrefix', 'borschik:include:')
     .builder(function (files) {
+        var prefix = '/*' + this._includePrefix;
+
         return files.map(function (file) {
-            return '/*borschik:include:' + this.node.relativePath(file.fullname) + '*/';
+            return prefix + this.node.relativePath(file.fullname) + '*/';
         }, this).join(EOL);
     })
     .createTech();
