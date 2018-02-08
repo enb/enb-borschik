@@ -27,6 +27,7 @@ borschik
 * [minify](#minify)
 * [freeze](#freeze)
 * [comments](#comments)
+* [includePrefix](#includePrefix)
 * [tech](#tech)
 * [techOptions](#techoptions)
 
@@ -84,6 +85,12 @@ borschik
 Тип: `Boolean`. По умолчанию: `true`.
 
 Позволяет настраивать опцию `comments` пакета `borschik`, которая отвечает за поясняющие комментарии к склеенным файлам.
+
+#### includePrefix
+
+Тип: `String`. По умолчанию: `'borschik:include:'`.
+
+Позволяет настраивать генерируемую технологией обвязку.
 
 #### tech
 
