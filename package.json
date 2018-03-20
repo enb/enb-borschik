@@ -21,13 +21,13 @@
     "enb": ">= 0.16.0 < 2.0.0"
   },
   "dependencies": {
-    "borschik": "1.7.1",
+    "borschik": "1.8.0",
     "inherit": "2.2.6",
     "vow": "0.4.16"
   },
   "devDependencies": {
     "borschik-tech-cleancss": "2.1.0",
-    "bower": "1.8.0",
+    "bower": "1.8.2",
     "enb": ">= 0.16.0 < 2.0.0",
     "fs-extra": "0.26.6",
     "istanbul": "0.4.5",
